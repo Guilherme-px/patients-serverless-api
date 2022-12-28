@@ -7,7 +7,7 @@ const updatePatientsController = async (req: Request, res: Response) => {
 
     const { Item: patient } = await getPatientsByIdSerive(id);
 
-    if (!patient) return res.status(404).send('patient not found');
+    if (!patient) return res.status(404).send('Paciente não encontrado');
 
     const newPatientUpdate = await updatePatientsService(req.body, id);
 
