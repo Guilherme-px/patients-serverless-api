@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { execute } from '../../services/patients/getPatientsByIdService';
+import { getPatientsByIdSerive } from '../../services/patients/getPatientsByIdService';
 
 const getPatientsByIdController = async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const { Item: patient } = await execute(id);
+    const { Item: patient } = await getPatientsByIdSerive(id);
 
     if (!patient) return res.status(404).send('Id não encontrado');
 
