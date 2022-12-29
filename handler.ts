@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { Response, Request, NextFunction } from 'express';
 import { CelebrateError } from 'celebrate';
 import serverless from 'serverless-http';
@@ -8,6 +9,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
 
 app.use('/patients', patientRoutes);
 
