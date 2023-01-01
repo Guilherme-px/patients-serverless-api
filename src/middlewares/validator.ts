@@ -14,7 +14,7 @@ const patientValidator = {
             .required()
             .messages(customMessageErrors('o email')),
         gender: Joi.string()
-            .valid('Masculino', 'Feminino')
+            .valid('Masculino', 'Feminino', 'Outro')
             .required()
             .messages(customMessageErrors('o genero')),
         birthday: Joi.string()
