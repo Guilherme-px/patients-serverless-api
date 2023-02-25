@@ -1,9 +1,6 @@
-import AWS from 'aws-sdk';
 import { Patient } from '../../types/interfaces/Patient';
 import { v4 } from 'uuid';
-
-const dynamoClient = new AWS.DynamoDB.DocumentClient();
-const tableName = process.env.PATIENTS_TABLE;
+import { dynamoClient, tableName } from '../../utils/databaseManager';
 
 const createPatientsSerive = async (patient: Patient) => {
     const newPatient = {

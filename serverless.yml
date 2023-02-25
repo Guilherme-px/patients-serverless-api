@@ -2,7 +2,19 @@ service: backend
 frameworkVersion: '3'
 
 custom:
-  tableName: 'patients-table-${sls:stage}'
+    tableName: 'patients-table-${sls:stage}'
+    serverless-offline:
+        httpPort: 8484
+    dynamodb:
+        stages:
+            - dev
+        start:
+            port: 8000
+            inMemory: true
+            heapInitial: 200m
+            heapMax: 1g
+            migrate: true
+            convertEmptyValues: true
 
 provider:
   name: aws
@@ -43,6 +55,11 @@ resources:
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:custom.tableName}
+        ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dynamodb-local

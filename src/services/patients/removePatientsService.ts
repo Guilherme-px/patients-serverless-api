@@ -1,7 +1,4 @@
-import AWS from 'aws-sdk';
-
-const dynamoClient = new AWS.DynamoDB.DocumentClient();
-const tableName = process.env.PATIENTS_TABLE;
+import { dynamoClient, tableName } from '../../utils/databaseManager';
 
 const removePatientsSerive = async (id: string) => {
     const params = {
