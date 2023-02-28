@@ -17,49 +17,49 @@ custom:
             convertEmptyValues: true
 
 provider:
-  name: aws
-  runtime: nodejs16.x
-  region: sa-east-1
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - dynamodb:Query
-            - dynamodb:Scan
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-            - dynamodb:UpdateItem
-            - dynamodb:DeleteItem
-          Resource:
-            - Fn::GetAtt: [ PatientsTable, Arn ]
-  environment:
-    PATIENTS_TABLE: ${self:custom.tableName}
+    name: aws
+    runtime: nodejs16.x
+    region: sa-east-1
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action:
+                      - dynamodb:Query
+                      - dynamodb:Scan
+                      - dynamodb:GetItem
+                      - dynamodb:PutItem
+                      - dynamodb:UpdateItem
+                      - dynamodb:DeleteItem
+                  Resource:
+                      - Fn::GetAtt: [ PatientsTable, Arn ]
+    environment:
+        PATIENTS_TABLE: ${self:custom.tableName}
 
 functions:
-  api:
-    handler: handler.handler
-    events:
-      - httpApi: '*'
+    api:
+        handler: handler.handler
+        events:
+            - httpApi: '*'
 
 resources:
-  Resources:
-    PatientsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:custom.tableName}
-        ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
+    Resources:
+        PatientsTable:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                AttributeDefinitions:
+                    - AttributeName: id
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: id
+                      KeyType: HASH
+                BillingMode: PAY_PER_REQUEST
+                TableName: ${self:custom.tableName}
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 1
+                    WriteCapacityUnits: 1
 
 plugins:
-  - serverless-plugin-typescript
-  - serverless-offline
-  - serverless-dynamodb-local
+    - serverless-plugin-typescript
+    - serverless-offline
+    - serverless-dynamodb-local

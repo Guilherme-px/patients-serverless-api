@@ -15,7 +15,7 @@
     "scripts": {
         "lint": "eslint src/**/*.ts --max-warnings=0",
         "prepare": "husky install",
-        "dev": "sls offline start"
+        "dev": "sls offline start --noTimeout"
     },
     "dependencies": {
         "celebrate": "^15.0.1",

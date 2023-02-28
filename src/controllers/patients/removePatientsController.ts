@@ -11,7 +11,7 @@ const removePatientsController = async (req: Request, res: Response) => {
 
     await removePatientsSerive(id);
 
-    return res.status(200);
+    return res.status(200).end();
 };
 
 export { removePatientsController };
