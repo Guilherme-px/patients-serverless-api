@@ -1,8 +1,8 @@
-import { dynamoClient, tableName } from '../../utils/databaseManager';
+import { dynamoClient, patientTableName } from '../../utils/databaseManager';
 
 const getPatientsByIdSerive = async (id: string) => {
     const params = {
-        TableName: tableName!,
+        TableName: patientTableName!,
         Key: {
             id,
         },

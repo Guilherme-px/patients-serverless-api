@@ -10,6 +10,7 @@ if (process.env.IS_OFFLINE) {
     };
 }
 const dynamoClient = new AWS.DynamoDB.DocumentClient(options);
-const tableName = process.env.PATIENTS_TABLE;
+const patientTableName = process.env.PATIENTS_TABLE;
+const userTableName = process.env.USERS_TABLE;
 
-export { dynamoClient, tableName };
+export { dynamoClient, patientTableName, userTableName };

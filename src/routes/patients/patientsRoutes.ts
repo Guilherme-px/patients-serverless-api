@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { celebrate } from 'celebrate';
 
 import { createPatientController } from '../../controllers/patients/createPatientController';
-import { patientValidator } from '../../middlewares/validator';
+import { patientValidator } from '../../middlewares/patientValidator';
 import { getPatientsController } from '../../controllers/patients/getPatientsController';
 import { getPatientsByIdController } from '../../controllers/patients/getPatientsByIdController';
 import { updatePatientsController } from '../../controllers/patients/updatePatientsController';

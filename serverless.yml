@@ -2,7 +2,8 @@ service: backend
 frameworkVersion: '3'
 
 custom:
-    tableName: 'patients-table-${sls:stage}'
+    patientTable: 'patients-table-${sls:stage}'
+    userTable: 'users-table-${sls:stage}'
     serverless-offline:
         httpPort: 8484
     dynamodb:
@@ -33,8 +34,10 @@ provider:
                       - dynamodb:DeleteItem
                   Resource:
                       - Fn::GetAtt: [ PatientsTable, Arn ]
+                      - Fn::GetAtt: [ UsersTable, Arn ]
     environment:
-        PATIENTS_TABLE: ${self:custom.tableName}
+        PATIENTS_TABLE: ${self:custom.patientTable}
+        USERS_TABLE: ${self:custom.userTable}
 
 functions:
     api:
@@ -50,11 +53,43 @@ resources:
                 AttributeDefinitions:
                     - AttributeName: id
                       AttributeType: S
+                    - AttributeName: email
+                      AttributeType: S
                 KeySchema:
                     - AttributeName: id
                       KeyType: HASH
                 BillingMode: PAY_PER_REQUEST
-                TableName: ${self:custom.tableName}
+                GlobalSecondaryIndexes:
+                    - IndexName: 'email-index'
+                      KeySchema:
+                        - AttributeName: 'email'
+                          KeyType: 'HASH'
+                      Projection:
+                          ProjectionType: 'ALL'
+                TableName: ${self:custom.patientTable}
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 1
+                    WriteCapacityUnits: 1
+        UsersTable:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                AttributeDefinitions:
+                    - AttributeName: id
+                      AttributeType: S
+                    - AttributeName: email
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: id
+                      KeyType: HASH
+                BillingMode: PAY_PER_REQUEST
+                GlobalSecondaryIndexes:
+                    - IndexName: 'email-index'
+                      KeySchema:
+                        - AttributeName: 'email'
+                          KeyType: 'HASH'
+                      Projection:
+                          ProjectionType: 'ALL'
+                TableName: ${self:custom.userTable}
                 ProvisionedThroughput:
                     ReadCapacityUnits: 1
                     WriteCapacityUnits: 1

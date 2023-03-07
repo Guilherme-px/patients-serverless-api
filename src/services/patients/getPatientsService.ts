@@ -1,8 +1,8 @@
-import { dynamoClient, tableName } from '../../utils/databaseManager';
+import { dynamoClient, patientTableName } from '../../utils/databaseManager';
 
 const getPatientsService = async () => {
     const params = {
-        TableName: tableName!,
+        TableName: patientTableName!,
     };
 
     return await dynamoClient.scan(params).promise();

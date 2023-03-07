@@ -1,9 +1,9 @@
 import { Patient } from '../../types/interfaces/Patient';
-import { dynamoClient, tableName } from '../../utils/databaseManager';
+import { dynamoClient, patientTableName } from '../../utils/databaseManager';
 
 const updatePatientsService = async (patient: Patient, id: string) => {
     const params = {
-        TableName: tableName!,
+        TableName: patientTableName!,
         Item: {
             id,
             ...patient,

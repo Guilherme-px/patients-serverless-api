@@ -16,7 +16,7 @@ const patientValidator = {
         gender: Joi.string()
             .valid('Masculino', 'Feminino', 'Outro')
             .required()
-            .messages(customMessageErrors('o genero')),
+            .messages(customMessageErrors('o gênero')),
         birthday: Joi.string()
             .regex(/^\d{2}\/\d{2}\/\d{4}$/)
             .required()
@@ -27,7 +27,7 @@ const patientValidator = {
                 .messages(customMessageErrors('o nome da rua')),
             streetNumber: Joi.number()
                 .required()
-                .messages(customMessageErrors('o numero da casa')),
+                .messages(customMessageErrors('o número da casa')),
             city: Joi.string()
                 .required()
                 .messages(customMessageErrors('a cidade')),

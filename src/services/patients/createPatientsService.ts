@@ -1,6 +1,6 @@
 import { Patient } from '../../types/interfaces/Patient';
 import { v4 } from 'uuid';
-import { dynamoClient, tableName } from '../../utils/databaseManager';
+import { dynamoClient, patientTableName } from '../../utils/databaseManager';
 
 const createPatientsSerive = async (patient: Patient) => {
     const newPatient = {
@@ -9,7 +9,7 @@ const createPatientsSerive = async (patient: Patient) => {
     };
 
     const params = {
-        TableName: tableName!,
+        TableName: patientTableName!,
         Item: newPatient,
     };
 

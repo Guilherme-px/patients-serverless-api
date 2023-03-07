@@ -4,6 +4,7 @@ import { Response, Request, NextFunction } from 'express';
 import { CelebrateError } from 'celebrate';
 import serverless from 'serverless-http';
 import patientRoutes from './src/routes/patients/patientsRoutes';
+import userRoutes from './src/routes/users/usersRoutes';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/patients', patientRoutes);
+app.use('/users', userRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof CelebrateError) {
