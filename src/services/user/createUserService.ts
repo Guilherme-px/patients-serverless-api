@@ -1,9 +1,12 @@
+import AWS from 'aws-sdk';
 import { AppError } from './../../errors/AppError';
 import { IUser } from './../../types/interfaces/IUser';
 import { v4 } from 'uuid';
 import { dynamoClient, userTableName } from '../../utils/databaseManager';
 
-const createUserService = async (user: IUser) => {
+const createUserService = async (
+    user: IUser
+): Promise<AWS.DynamoDB.PutItemOutput> => {
     const params = {
         TableName: userTableName!,
         IndexName: 'email-index',
